@@ -267,7 +267,10 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            RoundCont(items: Items_list4)
+            RoundCont(items: Items_list4),
+            const SizedBox(
+              height: 40,
+            ),
           ],
         ),
       ),
