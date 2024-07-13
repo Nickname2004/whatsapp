@@ -1,7 +1,11 @@
 allprojects {
     repositories {
         google()
-        mavenCentral()
+        maxvenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.gms.google-services4.4.2' 
     }
 }
 

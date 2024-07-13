@@ -13,7 +13,7 @@ class StoriesCirc extends StatelessWidget {
           Container(
             width: 60,
             height: 60,
-            decoration: BoxDecoration(
+            decoration: const  BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.grey,
             ),

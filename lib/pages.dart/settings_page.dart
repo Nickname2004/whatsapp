@@ -143,7 +143,7 @@ class SettingsPage extends StatelessWidget {
                             topRight: Radius.circular(10),
                           ),
                         ),
-                        child: Container(
+                        child: SizedBox(
                           height: 65,
                           width: MediaQuery.of(context).size.width,
                           child: Row(

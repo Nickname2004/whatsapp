@@ -73,7 +73,7 @@ class _UpdatesPageState extends State<UpdatesPage> {
               child: const Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    padding:  EdgeInsets.only(left: 10, right: 10),
                     child: Icon(
                       Icons.search,
                       color: Colors.grey,

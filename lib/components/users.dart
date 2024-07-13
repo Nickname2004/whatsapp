@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class users extends StatelessWidget {
-  const users({
+class Users extends StatelessWidget {
+  const Users({
     super.key,
     required this.child,
     // required this.imagepath,
