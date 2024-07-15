@@ -1,40 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:whatsapp/Services/Auth/auth_service.dart';
 import 'package:whatsapp/components/my_button.dart';
 import 'package:whatsapp/components/my_textfield.dart';
 
-class RegisterPage extends StatelessWidget {
-  RegisterPage({super.key, required this.onTap});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key, required this.onTap});
 
-  //register method
-  void register(BuildContext context) {
-    // get Auth service
-    final _auth = AuthService();
-    //if the passwords match, create the user
-    if (_passController.text == _confirmPassController.text) {
-      try {
-        _auth.signUpWithEmailPassword(
-          _emailController.text,
-          _passController.text,
-        );
-      } catch (e) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(e.toString()),
-          ),
-        );
-      }
+  //login method
+  void login(BuildContext context) async {
+    //get auth service
+    final authservice = AuthService();
+
+//try to login
+    try {
+      await authservice.signInWithEmailPassword(
+          _emailController.text, _passController.text);
     }
-    // if the passwords don't match tell the user to fix it up
-    else {
+
+//catch errors
+    catch (e) {
       showDialog(
         context: context,
-        builder: (context) => const AlertDialog(
-          title: Text(
-            'Please check your credentials!',
-            style: TextStyle(color: Colors.red),
-          ),
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
         ),
       );
     }
@@ -44,7 +33,6 @@ class RegisterPage extends StatelessWidget {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
-  final TextEditingController _confirmPassController = TextEditingController();
   final void Function()? onTap;
 
   @override
@@ -55,20 +43,12 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //Greeting message
+            //welcome back message
 
             Text(
-              'Welcome to WhatsApp!',
+              'Welcome back!',
               style: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
-            ),
-
-            Text(
-              'Get started by creating an account.',
-              style: TextStyle(
-                fontSize: 13,
+                fontSize: 16,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
@@ -98,19 +78,6 @@ class RegisterPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
             ),
 
-            const SizedBox(
-              height: 10,
-            ),
-
-            //confirm password textfield
-
-            MyTextfield(
-              hintText: 'Confirm Password',
-              obscureText: true,
-              controller: _confirmPassController,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-            ),
-
             SizedBox(
               height: 10,
             ),
@@ -118,8 +85,8 @@ class RegisterPage extends StatelessWidget {
             //login button
 
             MyButton(
-              text: 'Register',
-              onTap: () => register(context),
+              text: 'Login',
+              onTap: () => login(context),
               margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsets.all(10),
               borderRadius: BorderRadius.circular(10),
@@ -135,11 +102,11 @@ class RegisterPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Already a member?'),
+                Text('Not a member?'),
                 GestureDetector(
                   onTap: onTap,
                   child: Text(
-                    ' Login now',
+                    ' Register now',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.blue),
                   ),

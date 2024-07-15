@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/components/add_user_dialog.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({super.key});
@@ -8,6 +9,9 @@ class ChatsPage extends StatefulWidget {
 }
 
 class _ChatsPageState extends State<ChatsPage> {
+//Text controller
+  final _controller = TextEditingController();
+
   int _topButtonIndex = 0; // Index for top buttons
 
   void _onTopButtonPressed(int index) {
@@ -16,19 +20,33 @@ class _ChatsPageState extends State<ChatsPage> {
     });
   }
 
+  //save user
+  void saveUser() {
+    setState(() {
+      _users.add(_controller.text);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
+  //add a new user
+  void addNewUser() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return userDialog(
+          controller: _controller,
+          onSave: saveUser,
+          onCancel: () => Navigator.of(context).pop,
+        );
+      },
+    );
+  }
+
   final List<String> _users = [
     'user 1',
     'user 2',
     'user 3',
-    'user 4',
-    'user 5',
-    'user 6',
-    'user 7',
-    'user 8',
-    'user 9',
-    'user 10',
-    'user 11',
-    'user 12',
   ];
 
   @override
@@ -155,6 +173,11 @@ class _ChatsPageState extends State<ChatsPage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: addNewUser,
+        shape: CircleBorder(),
+        child: Icon(Icons.add),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

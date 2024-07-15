@@ -1,61 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/Services/Auth/auth_service.dart';
 import 'package:whatsapp/components/round_container.dart';
 
 class SettingsPage extends StatelessWidget {
+  void logout() {
+    // get auth service
+    final _auth = AuthService();
+    _auth.signOut();
+  }
+
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     List<ContainerItem> Items_list = [
       ContainerItem(
-          text: 'Broadcast lists',
-          icon: const Icon(Icons.speaker_phone_rounded, color: Colors.white)),
+        text: 'Broadcast lists',
+        icon: const Icon(Icons.speaker_phone_rounded, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Starred messages',
-          icon: const Icon(Icons.star_border, color: Colors.white)),
+        text: 'Starred messages',
+        icon: const Icon(Icons.star_border, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Linked devices',
-          icon: const Icon(Icons.laptop, color: Colors.white)),
+        text: 'Linked devices',
+        icon: const Icon(Icons.laptop, color: Colors.white),
+        onTap: () {},
+      ),
     ];
 
     List<ContainerItem> Items_list2 = [
       ContainerItem(
-          text: 'Account',
-          icon: const Icon(Icons.vpn_key_outlined, color: Colors.white)),
+        text: 'Account',
+        icon: const Icon(Icons.vpn_key_outlined, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Privacy',
-          icon: const Icon(Icons.lock_outlined, color: Colors.white)),
+        text: 'Privacy',
+        icon: const Icon(Icons.lock_outlined, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Chats',
-          icon: const Icon(Icons.chat_bubble_outline_outlined,
-              color: Colors.white)),
+        text: 'Chats',
+        icon:
+            const Icon(Icons.chat_bubble_outline_outlined, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Notifications',
-          icon: const Icon(Icons.notifications_active_outlined,
-              color: Colors.white)),
+        text: 'Notifications',
+        icon: const Icon(Icons.notifications_active_outlined,
+            color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Storage and data',
-          icon: const Icon(Icons.subdirectory_arrow_right_outlined,
-              color: Colors.white)),
+        text: 'Storage and data',
+        icon: const Icon(Icons.subdirectory_arrow_right_outlined,
+            color: Colors.white),
+        onTap: () {},
+      ),
     ];
 
     List<ContainerItem> Items_list3 = [
       ContainerItem(
-          text: 'Help',
-          icon: const Icon(Icons.help_rounded, color: Colors.white)),
+        text: 'Help',
+        icon: const Icon(Icons.help_rounded, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Tell a friend',
-          icon:
-              const Icon(Icons.favorite_border_outlined, color: Colors.white)),
+        text: 'Tell a friend',
+        icon: const Icon(Icons.favorite_border_outlined, color: Colors.white),
+        onTap: () {},
+      ),
     ];
 
     List<ContainerItem> Items_list4 = [
       ContainerItem(
-          text: 'Open Instagram',
-          icon: const Icon(Icons.camera_alt_outlined, color: Colors.white)),
+        text: 'Open Instagram',
+        icon: const Icon(Icons.camera_alt_outlined, color: Colors.white),
+        onTap: () {},
+      ),
       ContainerItem(
-          text: 'Open Facebook',
-          icon: const Icon(Icons.facebook, color: Colors.white)),
+        text: 'Open Facebook',
+        icon: const Icon(Icons.facebook, color: Colors.white),
+        onTap: () {},
+      ),
+    ];
+
+    List<ContainerItem> Items_list5 = [
+      ContainerItem(
+        text: 'Logout',
+        icon: const Icon(Icons.logout_rounded, color: Colors.white),
+        onTap: () {
+          logout();
+        },
+      ),
     ];
 
     return Scaffold(
@@ -253,21 +293,25 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             RoundCont(items: Items_list),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             RoundCont(items: Items_list2),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             RoundCont(items: Items_list3),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             RoundCont(items: Items_list4),
+            const SizedBox(
+              height: 30,
+            ),
+            RoundCont(items: Items_list5),
             const SizedBox(
               height: 40,
             ),

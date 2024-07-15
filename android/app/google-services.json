@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:66084333578:android:c1003d68d7f72b4e4c57f3",
+        "android_client_info": {
+          "package_name": "com.WhatsApp.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi-Vlx1s71GijtjALcQyW1g-Tl1tcGcBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:66084333578:android:4707fd4b5c43c4e84c57f3",
         "android_client_info": {
           "package_name": "com.example.whatsapp"

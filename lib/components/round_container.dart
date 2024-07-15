@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 class ContainerItem {
   final String text;
   final Icon icon;
-  
+  void Function()? onTap;
 
-  ContainerItem({required this.text, required this.icon});
+  ContainerItem({
+    required this.text,
+    required this.icon,
+    required this.onTap,
+  });
 }
 
 // Define the RoundCont widget
@@ -27,7 +31,7 @@ class RoundCont extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: item.onTap,
               splashColor: Colors.transparent.withOpacity(0.5),
               child: Ink(
                 decoration: BoxDecoration(
@@ -35,8 +39,10 @@ class RoundCont extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(index == 0 ? 10 : 0),
                     topRight: Radius.circular(index == 0 ? 10 : 0),
-                    bottomLeft: Radius.circular(index == items.length - 1 ? 10 : 0),
-                    bottomRight: Radius.circular(index == items.length - 1 ? 10 : 0),
+                    bottomLeft:
+                        Radius.circular(index == items.length - 1 ? 10 : 0),
+                    bottomRight:
+                        Radius.circular(index == items.length - 1 ? 10 : 0),
                   ),
                 ),
                 child: Row(
@@ -65,4 +71,3 @@ class RoundCont extends StatelessWidget {
     );
   }
 }
-
