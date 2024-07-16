@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp/Services/Auth/auth_gate.dart';
 import 'package:whatsapp/Themes/light_mode.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {

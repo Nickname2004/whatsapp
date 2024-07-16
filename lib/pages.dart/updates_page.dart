@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp/components/stories_circ.dart';
+import 'package:whatsapp/Stories_stuff/stories_circ.dart';
+import 'package:whatsapp/Stories_stuff/stories_layout.dart';
 
 class UpdatesPage extends StatefulWidget {
   const UpdatesPage({super.key});
@@ -9,6 +10,16 @@ class UpdatesPage extends StatefulWidget {
 }
 
 class _UpdatesPageState extends State<UpdatesPage> {
+  // story opener
+  void _openStory() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => storyPage(),
+      ),
+    );
+  }
+
   final List<String> _users = [
     'user 1',
     'user 2',
@@ -22,7 +33,6 @@ class _UpdatesPageState extends State<UpdatesPage> {
     'user 10',
     'user 11',
     'user 12',
-
   ];
 
   @override
@@ -73,7 +83,7 @@ class _UpdatesPageState extends State<UpdatesPage> {
               child: const Row(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only(left: 10, right: 10),
+                    padding: EdgeInsets.only(left: 10, right: 10),
                     child: Icon(
                       Icons.search,
                       color: Colors.grey,
@@ -138,30 +148,54 @@ class _UpdatesPageState extends State<UpdatesPage> {
             height: 130,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: const [
+              children: [
                 StoriesCirc(
                   text: 'Guy 1',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 2',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 3',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 4 ',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 5',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 6',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 7',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
                 StoriesCirc(
                   text: 'Guy 8',
+                  onTap: () {
+                    _openStory();
+                  },
                 ),
               ],
             ),
@@ -234,7 +268,9 @@ class _UpdatesPageState extends State<UpdatesPage> {
               },
             ),
           ),
-          Divider( color: Colors.grey[600],),
+          Divider(
+            color: Colors.grey[600],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

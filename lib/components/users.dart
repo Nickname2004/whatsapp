@@ -9,7 +9,7 @@ class Users extends StatelessWidget {
     // required this.imagepath,
   });
   final String child;
-  void Function(BuildContext)? deleteFunction;
+  Function(BuildContext)? deleteFunction;
 
   // final String imagepath;
 

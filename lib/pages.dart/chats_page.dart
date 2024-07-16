@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:whatsapp/components/add_user_dialog.dart';
+import 'package:whatsapp/pages.dart/archive_page.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({super.key});
@@ -9,7 +11,7 @@ class ChatsPage extends StatefulWidget {
 }
 
 class _ChatsPageState extends State<ChatsPage> {
-//Text controller
+  // Text controller
   final _controller = TextEditingController();
 
   int _topButtonIndex = 0; // Index for top buttons
@@ -20,7 +22,7 @@ class _ChatsPageState extends State<ChatsPage> {
     });
   }
 
-  //save user
+  // Save user
   void saveUser() {
     setState(() {
       _users.add(_controller.text);
@@ -29,7 +31,7 @@ class _ChatsPageState extends State<ChatsPage> {
     Navigator.of(context).pop();
   }
 
-  //add a new user
+  // Add a new user
   void addNewUser() {
     showDialog(
       context: context,
@@ -37,7 +39,7 @@ class _ChatsPageState extends State<ChatsPage> {
         return userDialog(
           controller: _controller,
           onSave: saveUser,
-          onCancel: () => Navigator.of(context).pop,
+          onCancel: () => Navigator.of(context).pop(),
         );
       },
     );
@@ -55,9 +57,80 @@ class _ChatsPageState extends State<ChatsPage> {
       ListView.builder(
         itemCount: _users.length,
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {},
-            splashColor: Colors.transparent.withOpacity(0.5),
+          return Slidable(
+            key: ValueKey(_users[index]),
+            startActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              children: [
+                SlidableAction(
+                  onPressed: (context) {},
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  icon: Icons.mark_unread_chat_alt_rounded,
+                  label: 'Unread',
+                ),
+                SlidableAction(
+                  onPressed: (context) {},
+                  backgroundColor: Colors.grey,
+                  foregroundColor: Colors.black,
+                  icon: Icons.push_pin_rounded,
+                  label: 'Pin',
+                ),
+              ],
+            ),
+            endActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              children: [
+                SlidableAction(
+                  onPressed: (context) {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height *
+                              0.35, //Height of the modal bottom sheet
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Name'),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.abc),
+                                title: Text('Button 1'),
+                                onTap: () {
+                                  Navigator.pop(context); // Close bottom sheet
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.abc),
+                                title: Text('Button 2'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  backgroundColor: Colors.grey,
+                  foregroundColor: Colors.white,
+                  icon: Icons.more_horiz,
+                  label: 'More',
+                ),
+                SlidableAction(
+                  onPressed: (context) {},
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.black,
+                  icon: Icons.archive_outlined,
+                  label: 'Archive',
+                )
+              ],
+            ),
             child: Container(
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
@@ -119,13 +192,15 @@ class _ChatsPageState extends State<ChatsPage> {
             'No unread chats',
             style: TextStyle(color: Colors.grey[400]),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            'View all chats',
-            style: TextStyle(
-              color: Colors.green[400],
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () =>
+                _onTopButtonPressed(0), // same method as the 'All' button
+            child: Text(
+              'View all chats',
+              style: TextStyle(
+                color: Colors.green[400],
+              ),
             ),
           ),
         ],
@@ -138,10 +213,10 @@ class _ChatsPageState extends State<ChatsPage> {
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(
-          255, 24, 23, 23), // Background color for scaffold
+          255, 24, 23, 23), // background color for scaffold
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(
-            255, 24, 23, 23), // Background color for app bar
+            255, 24, 23, 23), // background color for app bar
         leading: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Padding(
@@ -176,8 +251,8 @@ class _ChatsPageState extends State<ChatsPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: addNewUser,
-        shape: CircleBorder(),
-        child: Icon(Icons.add),
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,15 +309,12 @@ class _ChatsPageState extends State<ChatsPage> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  right: 5,
-                ),
+                padding: const EdgeInsets.only(left: 15, right: 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _topButtonIndex == 0
                         ? const Color.fromARGB(
-                            255, 4, 66, 26) // Button color for 'All' button
+                            255, 4, 66, 26) // button color for 'All' button
                         : Colors.grey[850],
                     foregroundColor:
                         _topButtonIndex == 0 ? Colors.white : Colors.grey,
@@ -252,14 +324,12 @@ class _ChatsPageState extends State<ChatsPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  right: 5,
-                ),
+                padding: const EdgeInsets.only(right: 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _topButtonIndex == 1
                         ? const Color.fromARGB(
-                            255, 4, 66, 26) // Button color for 'Unread' button
+                            255, 4, 66, 26) // button color for 'Unread' button
                         : Colors.grey[850],
                     foregroundColor:
                         _topButtonIndex == 1 ? Colors.white : Colors.grey,
@@ -272,7 +342,7 @@ class _ChatsPageState extends State<ChatsPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _topButtonIndex == 2
                       ? const Color.fromARGB(
-                          255, 4, 66, 26) // Button color for 'Groups' button
+                          255, 4, 66, 26) // button color for 'Groups' button
                       : Colors.grey[850],
                   foregroundColor:
                       _topButtonIndex == 2 ? Colors.white : Colors.grey,
@@ -282,13 +352,18 @@ class _ChatsPageState extends State<ChatsPage> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          const SizedBox(height: 5),
           Row(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ArchivePage(),
+                    ),
+                  );
+                },
                 splashColor: Colors.transparent.withOpacity(0.5),
                 child: Ink(
                   child: Container(
@@ -303,9 +378,7 @@ class _ChatsPageState extends State<ChatsPage> {
                           Icons.archive_outlined,
                           color: Colors.grey,
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
+                        SizedBox(width: 20),
                         Text(
                           'Archived',
                           style: TextStyle(

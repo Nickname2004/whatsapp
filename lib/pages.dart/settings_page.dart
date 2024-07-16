@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/Services/Auth/auth_service.dart';
+import 'package:whatsapp/components/responsive_widget.dart';
 import 'package:whatsapp/components/round_container.dart';
 
 class SettingsPage extends StatelessWidget {
